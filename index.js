@@ -1,5 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+const path = require("path");
 
 const express = require("express");
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //database
+mongoose.set("strictQuery",true);
 const db = require("./config/mongoose");
 //include layouts
 const expressLayouts = require("express-ejs-layouts");
@@ -32,7 +34,7 @@ app.use(express.static("./assets"));
 
 // EJS Set-up
 app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", path.resolve("./views"));
 
 //MongoStore stores session cookies
 app.use(
