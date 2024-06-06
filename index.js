@@ -9,7 +9,7 @@ const port = 8000;
 // used for session cookie
 const session = require("express-session");
 const passport = require("passport");
-const passportLocal = require("./config/passport-local-startergy");
+const passportLocal = require("./src/config/passport-local-startergy");
 //Mongo-store
 const MongoStore = require("connect-mongo");
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //database
 mongoose.set("strictQuery",true);
-const db = require("./config/mongoose");
+const db = require("./src/config/mongoose");
 //include layouts
 const expressLayouts = require("express-ejs-layouts");
 app.use(expressLayouts);
@@ -30,11 +30,11 @@ app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
 
 //static files
-app.use(express.static("./assets"));
+app.use(express.static("./src/assets"));
 
 // EJS Set-up
 app.set("view engine", "ejs");
-app.set("views", path.resolve("./views"));
+app.set("views", path.resolve("./src/views"));
 
 //MongoStore stores session cookies
 app.use(
@@ -64,7 +64,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
-app.use("/", require("./routes"));
+app.use("/", require("./src/routes"));
 
 app.listen(port, function (err) {
   if (err) {
