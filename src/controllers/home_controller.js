@@ -11,7 +11,7 @@ module.exports.home = function(req,res){
         }
         
         return res.render('home',{
-            title:"HomePage",
+            title:"Movie_library",
             movies : movies
         });
     })
